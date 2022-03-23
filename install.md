@@ -27,8 +27,24 @@ oc adm policy add-scc-to-user anyuid -z ibm-cp4ba-anyuid -n ${NAMESPACE}
   tar -xvzf ibm-cp-automation-3.2.0.tgz
 cd ibm-cp-automation/inventory/cp4aOperatorSdk/files/deploy/crs
 tar -xvzf cert-k8s-21.0.3.tar
+ 
+ kubectl create secret docker-registry admin.registrykey -n cp4ba \
+   --docker-username=cp \
+   --docker-password=<key> \
+   --docker-server=cp.icr.io \
   
  pwd 
  /home/cloudshell-user/ibm-cp-automation/inventory/cp4aOperatorSdk/files/deploy/crs
  cd cert-kubernetes/scripts
+  
+  
+  
+  
+export CP4BA_AUTO_PLATFORM="ROKS"
+export CP4BA_AUTO_DEPLOYMENT_TYPE="starter"
+export CP4BA_AUTO_ALL_NAMESPACES="No"
+export CP4BA_AUTO_NAMESPACE="cp4ba"
+export CP4BA_AUTO_CLUSTER_USER="cluster-admin"
+export CP4BA_AUTO_STORAGE_CLASS_FAST_ROKS="cp4a-file-retain-gold-gid"
+export CP4BA_AUTO_ENTITLEMENT_KEY="XXXXXXXXXXXXX"
   
