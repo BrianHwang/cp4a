@@ -19,10 +19,10 @@ metadata:
   name: ibm-cp4ba-anyuid
 imagePullSecrets:
 - name: "admin.registrykey"
-  ```
-  
+```
+```  
 oc adm policy add-scc-to-user anyuid -z ibm-cp4ba-anyuid -n ${NAMESPACE}
-  
+```  
 
 
 
