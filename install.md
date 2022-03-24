@@ -161,8 +161,22 @@ Click Workloads > Secrets, check below 2 exists
 admin.registrykey
 ibm-entitlement-key
 ```
+
+### process check
 ```
-# result check
+Please check the status of Pod by issue cmd:
+oc describe pod ibm-cp4a-operator-767f585b78-bqqmf -n cp4ba-dv1
+
+Please check the status of ReplicaSet by issue cmd:
+oc describe rs ibm-cp4a-operator-767f585b78 -n cp4ba-dv1
+
+Please check the status of PVC by issue cmd:
+oc describe pvc operator-shared-pvc -n cp4ba-dv1
+oc describe pvc cp4a-shared-log-pvc -n cp4ba-dv1
+
+```
+### result check
+```
 
 oc get pods
 podname=$(oc get pod | grep ibm-cp4a-operator | awk '{print $1}')
