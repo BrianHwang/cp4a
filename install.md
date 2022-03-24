@@ -136,7 +136,7 @@ spec:
   volumeName: pvc-cp4a-shared-log
  ```
     
- 
+ NOTE : KMS encrypted ??
   
   
 
