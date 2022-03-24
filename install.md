@@ -167,10 +167,16 @@ ibm-entitlement-key
 Please check the status of Pod by issue cmd:
 oc describe pod ibm-cp4a-operator-767f585b78-bqqmf -n cp4ba-dv1
 
-Please check the status of ReplicaSet by issue cmd:
+  Warning  Failed                  11m (x4 over 12m)     kubelet                  Failed to pull image "cp.icr.io/cp/cp4a/icp4a-operator@sha256:blabla": rpc error: code = Unknown desc = reading manifest sha256:blabla in cp.icr.io/cp/cp4a/icp4a-operator: denied: insufficient scope
+  Warning  Failed                  11m (x4 over 12m)     kubelet                  Error: ErrImagePull
+  Warning  Failed                  10m (x6 over 12m)     kubelet                  Error: ImagePullBackOff
+  Normal   BackOff                 2m33s (x41 over 12m)  kubelet                  Back-off pulling image 
+
+
+Please check the status of ReplicaSet by issue cmd:  NOTE : OKAY
 oc describe rs ibm-cp4a-operator-767f585b78 -n cp4ba-dv1
 
-Please check the status of PVC by issue cmd:
+Please check the status of PVC by issue cmd: NOTE : OKAY
 oc describe pvc operator-shared-pvc -n cp4ba-dv1
 oc describe pvc cp4a-shared-log-pvc -n cp4ba-dv1
 
