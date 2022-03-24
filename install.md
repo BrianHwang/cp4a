@@ -46,5 +46,26 @@ export CP4BA_AUTO_ALL_NAMESPACES="No"
 export CP4BA_AUTO_NAMESPACE="cp4ba-dv1"
 export CP4BA_AUTO_CLUSTER_USER="cluster-admin"
 export CP4BA_AUTO_STORAGE_CLASS_FAST_ROKS="cp4a-file-retain-gold-gid"
+export CP4BA_AUTO_STORAGE_CLASS_FAST_ROKS="gp2-csi"
 export CP4BA_AUTO_ENTITLEMENT_KEY="XXXXXXXXXXXXX"
 ```  
+```
+cd ibm-cp-automation/inventory/cp4aOperatorSdk/files/deploy/crs 
+cd cert-kubernetes/scripts
+./cp4a-clusteradmin-setup.sh
+```
+
+```
+oc get pods
+podname=$(oc get pod | grep ibm-cp4a-operator | awk '{print $1}')
+oc logs $podname -c operator -n NAMESPACE
+```
+
+  
+# Installing the capabilities by running the deployment script
+```
+oc get route console -n openshift-console -o yaml|grep routerCanonicalHostname
+```
+  
+  
+  
