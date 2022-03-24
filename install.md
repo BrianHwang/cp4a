@@ -1,4 +1,16 @@
+# IBM operator downlaod
+check the latest one from https://github.com/IBM/cloud-pak/tree/master/repo/case/ibm-cp-automation
+
+```
+wget https://github.com/IBM/cloud-pak/raw/master/repo/case/ibm-cp-automation-3.2.6.tgz
+tar -xvzf ibm-cp-automation-3.2.6.tgz
+cd ibm-cp-automation/inventory/cp4aOperatorSdk/files/deploy/crs
+tar -xvzf cert-k8s-21.0.3.tar
+```
+
+
 https://www.ibm.com/docs/en/cloud-paks/cp-biz-automation/21.0.3?topic=automation-installing
+
 
 # Preparing for a starter deployment 
 - https://www.ibm.com/docs/en/cloud-paks/cp-biz-automation/21.0.3?topic=deployments-preparing-starter-deployment
