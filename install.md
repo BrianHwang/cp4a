@@ -155,8 +155,15 @@ cd ibm-cp-automation/inventory/cp4aOperatorSdk/files/deploy/crs
 cd cert-kubernetes/scripts
 ./cp4a-clusteradmin-setup.sh
 ```
-
 ```
+Click Workloads > Secrets, check below 2 exists
+
+admin.registrykey
+ibm-entitlement-key
+```
+```
+# result check
+
 oc get pods
 podname=$(oc get pod | grep ibm-cp4a-operator | awk '{print $1}')
 oc logs $podname -c operator -n NAMESPACE
@@ -164,9 +171,13 @@ oc logs $podname -c operator -n NAMESPACE
 
   
 # Installing the capabilities by running the deployment script
+https://www.ibm.com/docs/en/cloud-paks/cp-biz-automation/21.0.3?topic=scripts-installing-capabilities-by-running-deployment-script
+
 ```
 oc get route console -n openshift-console -o yaml|grep routerCanonicalHostname
 ```
-  
+```
+oc login -u cp4a-user -p cp4a-pwd
+
   
   
