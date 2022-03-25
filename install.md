@@ -186,6 +186,7 @@ spec:
     requests:
       storage: 1Gi
   volumeName: pvc-operator-shared
+  storageClassName: gp2-csi
  ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -199,6 +200,7 @@ spec:
     requests:
       storage: 100Gi
   volumeName: pvc-cp4a-shared-log
+  storageClassName: gp2-csi
  ```
     
  NOTE : KMS encrypted ??
