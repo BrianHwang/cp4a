@@ -85,7 +85,7 @@ make it pointing to aws efs
 aws ec2 create-volume \
     --volume-type gp2 \
     --size 1 \
-    --availability-zone ap-southeast-2
+    --availability-zone ap-southeast-2a
 ```
 
 ```
@@ -108,7 +108,7 @@ spec:
   capacity:
     storage: 1Gi
   awsElasticBlockStore:
-    volumeID: 'aws://ap-southeast-2a/vol-095d9ec092c1ce5f4'
+    volumeID: 'aws://ap-southeast-2a/vol-059d7045b89bea7c4'
     fsType: ext4
   persistentVolumeReclaimPolicy: Retain
   storageClassName: gp2-csi
@@ -131,7 +131,7 @@ spec:
 aws ec2 create-volume \
     --volume-type gp2 \
     --size 100 \
-    --availability-zone ap-southeast-2
+    --availability-zone ap-southeast-2a
 ```
 
 ```
@@ -154,7 +154,7 @@ spec:
   capacity:
     storage: 100Gi
   awsElasticBlockStore:
-    volumeID: 'aws://ap-southeast-2a/vol-095d9ec092c1ce5f4'
+    volumeID: 'aws://ap-southeast-2a/vol-071c112f0a53d2f39'
     fsType: ext4
   persistentVolumeReclaimPolicy: Retain
   storageClassName: gp2-csi
