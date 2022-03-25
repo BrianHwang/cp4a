@@ -74,11 +74,20 @@ oc adm policy add-scc-to-user anyuid -z ibm-cp4ba-anyuid -n ${NAMESPACE}
 # aws volumn storageclass pv pvc
 ## aws
 
+ 
 operator-shared-pvc 1G
 cp4a-shared-log-pvc 100G
 
 https://www.ibm.com/docs/en/cloud-paks/cp-biz-automation/21.0.x?topic=operator-preparing-log-file-storage
 make it pointing to aws efs
+
+```
+aws ec2 create-volume \
+    --volume-type gp2 \
+    --size 1 \
+    --availability-zone ap-southeast-2
+```
+
 ```
 apiVersion: v1
 kind: PersistentVolume
@@ -116,7 +125,16 @@ spec:
               operator: In
               values:
                 - ap-southeast-2a
----
+```
+
+```
+aws ec2 create-volume \
+    --volume-type gp2 \
+    --size 100 \
+    --availability-zone ap-southeast-2
+```
+
+```
 apiVersion: v1
 kind: PersistentVolume
 metadata:
@@ -210,7 +228,11 @@ ibm-entitlement-key
 ```
 
 # 
-
+```
+oc delete pod <pod-id>
+oc get pods
+oc get pod <new-pod-id>
+```
 
 
 ### process check
