@@ -17,12 +17,46 @@ https://www.ibm.com/docs/en/cloud-paks/cp-biz-automation/21.0.3?topic=automation
 
 ```
 oc login --token=<token> --server=https://<cluster-ip>:<port>
+```
+```
 export NAMESPACE=cp4ba-dv1
 oc create namespace ${NAMESPACE} 
+oc project ${NAMESPACE}
 ```  
+```
+kubectl create secret docker-registry admin.registrykey -n ${NAMESPACE} \
+   --docker-server=cp.icr.io \
+   --docker-username=cp \
+   --docker-password="<user_password>" \
+   --docker-email=<user_email>
+```
+```
+kubectl create secret docker-registry ibm-entitlement-key -n ${NAMESPACE} \
+   --docker-username=cp \
+   --docker-password="<user_password>" \
+   --docker-server=cp.icr.io
+```
+
+# service account
 
 ```
-vi service-account-for-starter.yaml
+vi ervice-account-for-privileged.yaml
+```  
+```
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: ibm-cp4ba-privileged
+imagePullSecrets:
+- name: "admin.registrykey"
+```
+```
+oc apply -f service-account-for-privileged.yaml -n ${NAMESPACE}
+oc adm policy add-scc-to-user privileged -z ibm-cp4ba-privileged -n ${NAMESPACE}
+```
+
+```
+vi service-account-for-anyuid.yaml
 ```  
 ```
 apiVersion: v1
@@ -32,7 +66,8 @@ metadata:
 imagePullSecrets:
 - name: "admin.registrykey"
 ```
-```  
+```
+oc apply -f service-account-for-anyuid.yaml -n ${NAMESPACE}
 oc adm policy add-scc-to-user anyuid -z ibm-cp4ba-anyuid -n ${NAMESPACE}
 ```  
 
@@ -67,7 +102,7 @@ spec:
     volumeID: 'aws://ap-southeast-2a/vol-095d9ec092c1ce5f4'
     fsType: ext4
   persistentVolumeReclaimPolicy: Retain
-  storageClassName: gp2
+  storageClassName: gp2-csi
   volumeMode: Filesystem
   nodeAffinity:
     required:
@@ -104,7 +139,7 @@ spec:
     volumeID: 'aws://ap-southeast-2a/vol-095d9ec092c1ce5f4'
     fsType: ext4
   persistentVolumeReclaimPolicy: Retain
-  storageClassName: gp2
+  storageClassName: gp2-csi
   volumeMode: Filesystem
   nodeAffinity:
     required:
@@ -159,7 +194,7 @@ export CP4BA_AUTO_DEPLOYMENT_TYPE="starter"
 export CP4BA_AUTO_ALL_NAMESPACES="No"
 export CP4BA_AUTO_NAMESPACE="cp4ba-dv1"
 export CP4BA_AUTO_CLUSTER_USER="cluster-admin"
-export CP4BA_AUTO_STORAGE_CLASS_FAST_ROKS="gp2"
+export CP4BA_AUTO_STORAGE_CLASS_FAST_ROKS="gp2-csi"
 export CP4BA_AUTO_ENTITLEMENT_KEY="XXXXXXXXXXXXX"
 ```  
 ```
@@ -173,6 +208,10 @@ Click Workloads > Secrets, check below 2 exists
 admin.registrykey
 ibm-entitlement-key
 ```
+
+# 
+
+
 
 ### process check
 ```
